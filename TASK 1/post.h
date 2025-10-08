@@ -12,5 +12,6 @@ typedef struct Post{
 }Post;
 
 Post* createPost(const char* username, const char* caption);
+void likePost(Post* post);
 
 #endif

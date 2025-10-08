@@ -12,5 +12,6 @@ typedef struct Comment{
 } Comment;
 
 Comment* createComment(const char* username, const char* content);
+void likeComment(Comment* comment);
 
 #endif
