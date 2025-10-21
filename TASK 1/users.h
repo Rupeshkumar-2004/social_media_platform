@@ -1,17 +1,19 @@
 #ifndef USERS_H
 #define USERS_H
 
-#include <stdbool.h>
+#include<stdbool.h>
 
-struct User {
+// Definition of User structure
+struct User{
     char username[40];
     struct User* next;
 };
 
+// User management functions(prototypes):
 struct User* createUser(const char* username);
 void deleteUser(struct User* user);
-struct User* findUser(struct User* head, const char* username);
-bool addUser(struct User** head, const char* username);
+struct User* findUser(struct User* head,const char* username);
+bool addUser(struct User** head,const char* username);
 void displayUsers(struct User* head);
 
 #endif
