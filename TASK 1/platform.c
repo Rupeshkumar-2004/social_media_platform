@@ -23,20 +23,12 @@ struct Platform* createPlatform(){
     return platform;
 }
 
-<<<<<<< HEAD
-bool addPost(struct Platform* platform, const char* username, const char* caption) {
-    if (!platform) return false;
-    Post* newPost = createPost(username, caption);
-    if (!newPost) return false;
-    if (!platform->posts) {
-=======
 //function to add a post to the platform..
 bool addPost(struct Platform* platform,const char* username,const char* caption){
     if(!platform) return false;
     Post* newPost = createPost(username, caption);
     if(!newPost) return false;
     if(!platform->posts) {
->>>>>>> main-file
         platform->posts = newPost;
     }
     else{
