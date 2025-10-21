@@ -65,12 +65,11 @@ int main(){
         if(choice == 9) break;
         switch(choice){
             case 1: {
-                /* use the logged-in username declared above */
                 char caption[256];
                 printf("Enter caption: ");
-                getchar(); // to consume the newline character
+                getchar();
                 fgets(caption, sizeof(caption), stdin);
-                caption[strcspn(caption, "\n")] = 0; // remove newline character
+                caption[strcspn(caption, "\n")] = 0;
                 if(addPost(platform, username, caption)) 
                     printf("Post added successfully.\n");
                 else 
@@ -95,7 +94,7 @@ int main(){
                 printf("Enter username of the post owner: ");
                 scanf("%s", username);
                 printf("Enter caption of the post to delete: ");
-                getchar(); // to consume the newline character
+                getchar();
                 fgets(caption, sizeof(caption), stdin);
                 caption[strcspn(caption, "\n")] = 0; // remove newline character
                 printf("Enter occurrence number (0 for first occurrence): ");
