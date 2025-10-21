@@ -65,7 +65,8 @@ int main(){
         if(choice == 9) break;
         switch(choice){
             case 1: {
-                char username[50], caption[256];
+                /* use the logged-in username declared above */
+                char caption[256];
                 printf("Enter caption: ");
                 getchar(); // to consume the newline character
                 fgets(caption, sizeof(caption), stdin);
@@ -106,7 +107,24 @@ int main(){
                 break;
             }
             case 4: {
-                
+                printf("Add Comment feature not implemented in this build.\n");
+                break;
+            }
+            case 5: {
+                printf("View Comments feature not implemented in this build.\n");
+                break;
+            }
+            case 6: {
+                printf("Delete Comment feature not implemented in this build.\n");
+                break;
+            }
+            case 7: {
+                printf("Add Reply feature not implemented in this build.\n");
+                break;
+            }
+            case 8: {
+                printf("Delete Reply feature not implemented in this build.\n");
+                break;
             }
         }
     }

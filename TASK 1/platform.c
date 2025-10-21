@@ -17,13 +17,14 @@ struct Platform* createPlatform() {
     platform->postCount = 0;
     platform->commentCount = 0;
     platform->replyCount = 0;
+    platform->LastViewedPost = NULL;
     return platform;
 }
 
 bool addPost(struct Platform* platform, const char* username, const char* caption) {
-    if (!platform) return;
+    if (!platform) return false;
     Post* newPost = createPost(username, caption);
-    if (!newPost) return;
+    if (!newPost) return false;
     if (!platform->posts) {
         platform->posts = newPost;
     } else {
@@ -32,6 +33,7 @@ bool addPost(struct Platform* platform, const char* username, const char* captio
         temp->next = newPost;
     }
     platform->postCount++;
+    return true;
 }
 
 bool deletePost(struct Platform* platform, const char* username, const char* caption,const int n) {

@@ -13,6 +13,7 @@ Comment* createComment(const char* username, const char* content) {
     strcpy(newComment->username, username);
     strcpy(newComment->content, content);
     newComment->likes = 0;
+    newComment->replies = NULL;
     newComment->next = NULL;
     return newComment;
 }
