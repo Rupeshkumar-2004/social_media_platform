@@ -35,3 +35,22 @@ struct User* findUser(struct User* head, const char* username) {
     }
     return NULL;
 }
+
+bool addUser(struct User** head, const char* username) {
+    if (!head || !username) return false;
+    if (findUser(*head, username)) return false; // already exists
+    struct User* newUser = createUser(username);
+    if (!newUser) return false;
+    newUser->next = *head;
+    *head = newUser;
+    return true;
+}
+
+void displayUsers(struct User* head) {
+    struct User* temp = head;
+    printf("Registered users:\n");
+    while (temp) {
+        printf("- %s\n", temp->username);
+        temp = temp->next;
+    }
+}

@@ -18,9 +18,10 @@ typedef struct Platform {
 struct Platform* createPlatform();
 bool addPost(struct Platform* platform, const char* username, const char* caption);
 void displayAllPosts(const struct Platform* platform);
+void displayPost(const Post* post);
 bool deletePost(struct Platform* platform, const char* username, const char* caption,const int n);
-bool deleteComment(struct Platform* platform, const char* username, const char* content);
-void deletereply(struct Platform* platform, const char* username, const char* content);
+bool deleteComment(struct Platform* platform, const char* username, const char* content,const int n);
+bool deleteReply(struct Platform* platform, const char* username, const char* content);
 Post* viewPost(const struct Platform* platform,const int n, const char* username);
 Post* currPost(const struct Platform* platform);
 Post* nextPost(struct Platform* platform);
