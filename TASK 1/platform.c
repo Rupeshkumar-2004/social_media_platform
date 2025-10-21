@@ -7,9 +7,11 @@
 #include "comment.h"
 #include "reply.h"
 
-struct Platform* createPlatform() {
-    struct Platform* platform = (struct Platform*)malloc(sizeof(struct Platform));
-    if (!platform) {
+
+//function to create a platform..
+struct Platform* createPlatform(){
+    struct Platform* platform =(struct Platform*)malloc(sizeof(struct Platform));
+    if(!platform){
         printf("Memory allocation failed\n");
         exit(1);
     }
@@ -21,13 +23,23 @@ struct Platform* createPlatform() {
     return platform;
 }
 
+<<<<<<< HEAD
 bool addPost(struct Platform* platform, const char* username, const char* caption) {
     if (!platform) return false;
     Post* newPost = createPost(username, caption);
     if (!newPost) return false;
     if (!platform->posts) {
+=======
+//function to add a post to the platform..
+bool addPost(struct Platform* platform,const char* username,const char* caption){
+    if(!platform) return false;
+    Post* newPost = createPost(username, caption);
+    if(!newPost) return false;
+    if(!platform->posts) {
+>>>>>>> main-file
         platform->posts = newPost;
-    } else {
+    }
+    else{
         Post* temp = platform->posts;
         while (temp->next) temp = temp->next;
         temp->next = newPost;
@@ -36,17 +48,18 @@ bool addPost(struct Platform* platform, const char* username, const char* captio
     return true;
 }
 
-bool deletePost(struct Platform* platform, const char* username, const char* caption,const int n) {
-    if (!platform || !platform->posts) return false;
-    Post* temp = platform->posts;
-    Post* prev = NULL;
-    int count = 0;
-    while (temp) {
-        if (strcmp(temp->username, username) == 0 && strcmp(temp->caption, caption) == 0) {
-            if (count == n) {
-                if (prev) {
+//function to delete a post from the platform..
+bool deletePost(struct Platform* platform,const char* username,const char* caption,const int n) {
+    if(!platform||!platform->posts) return false;
+    Post* temp =platform->posts;
+    Post* prev =NULL;
+    int count =0;
+    while(temp){
+        if (strcmp(temp->username,username) ==0 && strcmp(temp->caption,caption) == 0) {
+            if (count ==n) {
+                if(prev){
                     prev->next = temp->next;
-                } else {
+                }else{
                     platform->posts = temp->next;
                 }
                 free(temp);
@@ -55,55 +68,59 @@ bool deletePost(struct Platform* platform, const char* username, const char* cap
             }
             count++;
         }
-        prev = temp;
-        temp = temp->next;
+        prev =temp;
+        temp =temp->next;
     }
     return false;
 }
-
+//function to view a specific post by index and username..
 Post* viewPost(const struct Platform* platform,const int n, const char* username) {
-    if (!platform || !platform->posts) return NULL;
-    Post* temp = platform->posts;
-    int count = 0;
-    while (temp) {
-        if (strcmp(temp->username, username) == 0) {
-            if (count == n) {
+    if (!platform||!platform->posts) return NULL;
+    Post* temp =platform->posts;
+    int count =0;
+    while(temp){
+        if(strcmp(temp->username,username) ==0) {
+            if(count ==n){
                 return temp;
             }
             count++;
         }
-        temp = temp->next;
+        temp =temp->next;
     }
     return NULL;
 }
 
+//function to get the current viewed post..
 Post* currPost(const struct Platform* platform) {
-    if (!platform || !platform->LastViewedPost) return NULL;
+    if(!platform||!platform->LastViewedPost) return NULL;
     return platform->LastViewedPost;
 }
 
+//function to get the next post..
 Post* nextPost(struct Platform* platform) {
-    if (!platform || !platform->LastViewedPost || !platform->LastViewedPost->next) return NULL;
-    platform->LastViewedPost = platform->LastViewedPost->next;
+    if (!platform||!platform->LastViewedPost||!platform->LastViewedPost->next) return NULL;
+    platform->LastViewedPost =platform->LastViewedPost->next;
     return platform->LastViewedPost;
 }
 
+//function to get the previous post..
 Post* prevPosts(const struct Platform* platform) {
-    if (!platform || !platform->LastViewedPost || platform->LastViewedPost == platform->posts) return NULL;
-    Post* temp = platform->posts;
-    while (temp && temp->next != platform->LastViewedPost) {
-        temp = temp->next;
+    if (!platform||!platform->LastViewedPost||platform->LastViewedPost ==platform->posts) return NULL;
+    Post* temp =platform->posts;
+    while (temp &&temp->next != platform->LastViewedPost) {
+        temp =temp->next;
     }
     return temp;
 }
 
-bool addComment(struct Platform* platform, Post* post, const char* username, const char* content) {
-    if (!platform || !post) return false;
-    Comment* newComment = createComment(username, content);
-    if (!newComment) return false;
-    if (!post->comments) {
+//function to add a comment to a post..
+bool addComment(struct Platform* platform,Post* post,const char* username,const char* content) {
+    if(!platform||!post) return false;
+    Comment* newComment =createComment(username,content);
+    if(!newComment) return false;
+    if(!post->comments){
         post->comments = newComment;
-    } else {
+    }else{
         Comment* temp = post->comments;
         while (temp->next) temp = temp->next;
         temp->next = newComment;
@@ -112,19 +129,21 @@ bool addComment(struct Platform* platform, Post* post, const char* username, con
     return true;
 }
 
-bool deleteComment(struct Platform* platform, const char* username, const char* content,const int n) {
-    if (!platform || !platform->posts) return false;
-    Post* tempPost = platform->posts;
-    while (tempPost) {
-        Comment* tempComment = tempPost->comments;
-        Comment* prevComment = NULL;
-        int count = 0;
-        while (tempComment) {
-            if (strcmp(tempComment->username, username) == 0 && strcmp(tempComment->content, content) == 0) {
-                if (count == n) {
-                    if (prevComment) {
-                        prevComment->next = tempComment->next;
-                    } else {
+//function to delete a comment from a post..
+bool deleteComment(struct Platform* platform,const char* username,const char* content,const int n) {
+    if(!platform||!platform->posts) return false;
+    Post* tempPost =platform->posts;
+    while(tempPost) {
+        Comment* tempComment =tempPost->comments;
+        Comment* prevComment =NULL;
+        int count =0;
+        while(tempComment){
+            if(strcmp(tempComment->username,username) ==0 && strcmp(tempComment->content,content) ==0) {
+                if(count == n){
+                    if(prevComment){
+                        prevComment->next =tempComment->next;
+                    }
+                    else{
                         tempPost->comments = tempComment->next;
                     }
                     free(tempComment);
@@ -133,102 +152,108 @@ bool deleteComment(struct Platform* platform, const char* username, const char* 
                 }
                 count++;
             }
-            prevComment = tempComment;
-            tempComment = tempComment->next;
+            prevComment =tempComment;
+            tempComment =tempComment->next;
         }
-        tempPost = tempPost->next;
+        tempPost =tempPost->next;
     }
     return false;
 }
 
-Comment* viewComments(const struct Platform* platform,const int n, const char* username) {
-    if (!platform || !platform->posts) return NULL;
+//function to view comments of a specific post by index and username..
+Comment* viewComments(const struct Platform* platform,const int n,const char* username) {
+    if(!platform||!platform->posts) return NULL;
     Post* tempPost = platform->posts;
-    while (tempPost) {
-        if (strcmp(tempPost->username, username) == 0) {
-            Comment* tempComment = tempPost->comments;
-            int count = 0;
-            while (tempComment) {
-                if (count == n) {
+    while(tempPost){
+        if(strcmp(tempPost->username, username) ==0){
+            Comment* tempComment =tempPost->comments;
+            int count =0;
+            while(tempComment){
+                if(count == n){
                     return tempComment;
                 }
                 count++;
-                tempComment = tempComment->next;
+                tempComment =tempComment->next;
             }
         }
-        tempPost = tempPost->next;
+        tempPost =tempPost->next;
     }
     return NULL;
 }
 
-bool addReply(struct Platform* platform, Comment* comment, const char* username, const char* content) {
-    if (!platform || !comment) return false;
-    Reply* newReply = createReply(username, content);
-    if (!newReply) return false;
-    if (!comment->replies) {
-        comment->replies = newReply;
-    } else {
-        Reply* temp = comment->replies;
-        while (temp->next) temp = temp->next;
-        temp->next = newReply;
+//function to add a reply to a comment..
+bool addReply(struct Platform* platform,Comment* comment,const char* username,const char* content) {
+    if (!platform||!comment) return false;
+    Reply* newReply =createReply(username,content);
+    if(!newReply) return false;
+    if(!comment->replies){
+        comment->replies =newReply;
+    }else{
+        Reply* temp =comment->replies;
+        while (temp->next) temp =temp->next;
+        temp->next =newReply;
     }
     platform->replyCount++;
     return true;
 }
 
-bool deleteReply(struct Platform* platform, const char* username, const char* content) {
-    if (!platform || !platform->posts) return false;
-    Post* tempPost = platform->posts;
-    while (tempPost) {
-        Comment* tempComment = tempPost->comments;
-        while (tempComment) {
-            Reply* tempReply = tempComment->replies;
-            Reply* prevReply = NULL;
-            while (tempReply) {
-                if (strcmp(tempReply->username, username) == 0 && strcmp(tempReply->content, content) == 0) {
-                    if (prevReply) {
-                        prevReply->next = tempReply->next;
-                    } else {
-                        tempComment->replies = tempReply->next;
+//function to delete a reply from a comment..
+bool deleteReply(struct Platform* platform,const char* username,const char* content) {
+    if(!platform||!platform->posts) return false;
+    Post* tempPost =platform->posts;
+    while(tempPost){
+        Comment* tempComment =tempPost->comments;
+        while(tempComment){
+            Reply* tempReply =tempComment->replies;
+            Reply* prevReply =NULL;
+            while(tempReply){
+                if(strcmp(tempReply->username,username) == 0 && strcmp(tempReply->content,content) == 0) {
+                    if(prevReply){
+                        prevReply->next =tempReply->next;
+                    }
+                    else{
+                        tempComment->replies =tempReply->next;
                     }
                     free(tempReply);
                     platform->replyCount--;
                     return true;
                 }
-                prevReply = tempReply;
-                tempReply = tempReply->next;
+                prevReply =tempReply;
+                tempReply =tempReply->next;
             }
-            tempComment = tempComment->next;
+            tempComment =tempComment->next;
         }
-        tempPost = tempPost->next;
+        tempPost =tempPost->next;
     }
     return false;
 }
 
+//function to display a specific post..
 void displayPost(const Post* post) {
-    if (!post) return;
-    printf("Post by %s: %s\n", post->username, post->caption);
-    printf("Likes: %d\n", post->likes);
+    if(!post) return;
+    printf("Post by %s: %s\n", post->username,post->caption);
+    printf("Likes: %d\n",post->likes);
     Comment* tempComment = post->comments;
-    while (tempComment) {
+    while(tempComment){
         printf("  Comment by %s: %s (Likes: %d)\n", tempComment->username, tempComment->content, tempComment->likes);
         Reply* tempReply = tempComment->replies;
-        while (tempReply) {
+        while(tempReply){
             printf("    Reply by %s: %s (Likes: %d)\n", tempReply->username, tempReply->content, tempReply->likes);
-            tempReply = tempReply->next;
+            tempReply =tempReply->next;
         }
-        tempComment = tempComment->next;
+        tempComment =tempComment->next;
     }
 }
 
+//function to display all posts in the platform..
 void displayAllPosts(const struct Platform* platform) {
-    if (!platform || !platform->posts) {
+    if(!platform||!platform->posts){
         printf("No posts available.\n");
         return;
     }
     Post* temp = platform->posts;
-    while (temp) {
+    while(temp){
         displayPost(temp);
-        temp = temp->next;
+        temp =temp->next;
     }
 }

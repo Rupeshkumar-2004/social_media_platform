@@ -1,6 +1,7 @@
 #ifndef REPLY_H
 #define REPLY_H
 
+// Definition of Reply structure
 typedef struct Reply {
     char username[40];
     char content[250];
@@ -8,7 +9,8 @@ typedef struct Reply {
     int likes;
 } Reply;
 
-Reply* createReply(const char* username, const char* content);
+// Reply management functions (prototypes):
+Reply* createReply(const char* username,const char* content);
 void likeReply(Reply* reply);
 
 #endif

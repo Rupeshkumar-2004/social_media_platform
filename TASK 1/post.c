@@ -4,9 +4,10 @@
 
 #include "post.h"
 
-Post* createPost(const char* username, const char* caption) {
+//function to create a post..
+Post* createPost(const char* username,const char* caption) {
     Post* newPost = (Post*)malloc(sizeof(Post));
-    if (!newPost) {
+    if(!newPost){
         printf("Memory allocation failed\n");
         exit(1);
     }
@@ -18,14 +19,9 @@ Post* createPost(const char* username, const char* caption) {
     return newPost;
 }
 
+//function to like a post..
 void likePost(Post* post) {
-    if (post) {
+    if(post){
         post->likes++;
     }
 }
-
-
-//futher we have an option to delete a post and free memory
-//futher we can implement a function to delete a comment from a post
-//futher we can implement a function to unlike a post or comment
-//futher we can implement a function to edit a post or comments

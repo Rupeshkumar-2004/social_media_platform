@@ -4,9 +4,10 @@
 
 #include "comment.h"
 
-Comment* createComment(const char* username, const char* content) {
-    Comment* newComment = (Comment*)malloc(sizeof(Comment));
-    if (!newComment) {
+//function to create a comment..
+Comment* createComment(const char* username,const char* content) {
+    Comment* newComment =(Comment*)malloc(sizeof(Comment));
+    if(!newComment){
         printf("Memory allocation failed\n");
         exit(1);
     }
@@ -18,8 +19,9 @@ Comment* createComment(const char* username, const char* content) {
     return newComment;
 }
 
+//function to like a comment..
 void likeComment(Comment* comment) {
-    if (comment) {
+    if(comment){
         comment->likes++;
     }
 }

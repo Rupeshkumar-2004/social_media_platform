@@ -3,6 +3,7 @@
 
 #include "comment.h"
 
+// Definition of Post structure
 typedef struct Post{
     char username[40];
     char caption[250];
@@ -11,7 +12,8 @@ typedef struct Post{
     struct Post* next;
 }Post;
 
-Post* createPost(const char* username, const char* caption);
+// Post management functions (prototypes)..
+Post* createPost(const char* username,const char* caption);
 void likePost(Post* post);
 
 #endif
