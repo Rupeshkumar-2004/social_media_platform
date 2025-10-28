@@ -3,7 +3,7 @@
 #include <ctype.h>
 #include "platform.h"
 
-
+//menu for the available commands
 static void showMenu(void) {
     puts("Available Commands:");
     puts("create_platform");
@@ -22,11 +22,14 @@ static void showMenu(void) {
     puts("exit(quit)");
 }
 
+//for create platform..
 static void cmd_create(void){
     createPlatform();
     printf("Platform initialized.\n");
 }
 
+
+//for adding the post..
 static void cmd_addPost(const char *args){
     char user[128],caption[256];
     if(sscanf(args,"%s %[^\n]", user, caption)!=2){
@@ -38,6 +41,7 @@ static void cmd_addPost(const char *args){
     }
 }
 
+//for deleting the post
 static void cmd_deletePost(const char *args){
     int n;
     if(sscanf(args,"%d",&n)!=1){
@@ -49,6 +53,7 @@ static void cmd_deletePost(const char *args){
     }
 }
 
+//for viewing the last viewed post..
 static void cmd_viewPost(const char *args){
     int n;
     if(sscanf(args,"%d",&n)!=1){
@@ -64,6 +69,7 @@ static void cmd_viewPost(const char *args){
     }
 }
 
+//for viewing the current post
 static void cmd_curr(){
     struct post *p=curr_post();
     if(p){
@@ -74,6 +80,7 @@ static void cmd_curr(){
     }
 }
 
+//for viewing the next post
 static void cmd_next(){
     struct post *p = next_post();
     if(p){
@@ -84,6 +91,7 @@ static void cmd_next(){
     }
 }
 
+//for viewing the previous post..
 static void cmd_prev(){
     struct post *p =prev_post();
     if(p){
@@ -94,6 +102,7 @@ static void cmd_prev(){
     }
 }
 
+//for adding the comment by an user..
 static void cmd_addComment(const char *args) {
     char user[128],text[256];
     if (sscanf(args,"%s %[^\n]",user,text)!=2){
@@ -104,6 +113,7 @@ static void cmd_addComment(const char *args) {
         printf("No active post to comment on.\n");
 }
 
+//for deleting a comment from a post
 static void cmd_deleteComment(const char *args) {
     int n;
     if(sscanf(args,"%d",&n)!=1){
@@ -114,11 +124,13 @@ static void cmd_deleteComment(const char *args) {
         printf("Comment %d not found.\n", n);
 }
 
+//for viewing all comments
 static void cmd_viewComments(void) {
     struct comment *c=view_comment();
     display_comments(c);
 }
 
+//for adding reply to a comment
 static void cmd_addReply(const char *args) {
     char user[128],content[256];
     int comment_number;
@@ -139,6 +151,7 @@ static void cmd_addReply(const char *args) {
     }
 }
 
+//for deleting a reply from a post and a comment
 static void cmd_deleteReply(const char *args) {
     int n, m;
     if(sscanf(args,"%d %d",&n,&m)!=2){
@@ -149,13 +162,16 @@ static void cmd_deleteReply(const char *args) {
         printf("Unable to delete reply %d\n",m);
 }
 
+//forward declaration..
 typedef void (*command_handler)(const char *);
 
+//structure that maps argument with the respective function
 typedef struct{
     const char *name;
     command_handler handler;
 }command_entry;
 
+//all functions and their arguments
 static const command_entry commands[]={
     {"create_platform",(command_handler)cmd_create},
     {"add_post",cmd_addPost},
@@ -178,6 +194,7 @@ int main(void) {
     showMenu();
     createPlatform();
 
+    //infinte loop for multiple input..
     for(;;){
         if(!fgets(input,sizeof(input),stdin)){
             break;
@@ -199,6 +216,7 @@ int main(void) {
         }
 
         int found = 0;
+        //for matching the commands
         for (const command_entry *ce=commands;ce->name;++ce){
             if(!strcmp(cmd,ce->name)){
                 ce->handler(args);

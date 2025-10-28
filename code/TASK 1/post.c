@@ -1,5 +1,6 @@
 #include<stdlib.h>
 #include<string.h>
+#include<stdio.h>
 #include"post.h"
 
 // Function to create a new post
@@ -23,6 +24,7 @@ struct post* create_post(char* username,char* caption){
     return new_post;
 }
 
+//function to free the allocated memory after deleting the post
 void free_post(struct post* p){
     if(p == NULL){
         return;

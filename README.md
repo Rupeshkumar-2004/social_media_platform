@@ -10,7 +10,6 @@ This project implements a simple modular social media platform in C, consisting 
 - Comments
 - Replies
 - Platform management
-- likes
 
 All modules are separated into `.c` and `.h` files for modularity.
 
@@ -31,16 +30,15 @@ All modules are in `.cpp` files.
 │   │   ├── post.h
 │   │   ├── reply.c
 │   │   └── reply.h
+|   |   ├── Makefile
 │   └── TASK2/
-│       └── code.cpp
-├── Makefile
+│       └── main.cpp
 └── README.md
 
 ## Compilation
 Run the following commands:
-
+Direct yourself to the path 106124104/code/TASK 1.
 ```bash
 make        # compile
-make run1   # compile and execute
-make run2   # complie and execute
 make clean  # clean build files
+

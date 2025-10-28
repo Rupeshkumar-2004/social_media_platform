@@ -2,6 +2,7 @@
 #define PLATFORM_H
 
 #include<stdbool.h>
+
 #include"post.h"
 #include"comment.h"
 #include"reply.h"
@@ -12,8 +13,8 @@ struct platform{
     struct post* last_viwed;
 };
 
-//pfunctions declarations
-struct platform* initialize_platform();
+//functions declarations
+struct platform* createPlatform();
 bool add_post(char* username,char* caption);
 bool delete_post(int n);
 struct post* view_post(int n);

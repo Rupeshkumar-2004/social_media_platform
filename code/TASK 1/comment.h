@@ -5,9 +5,8 @@
 
 
 struct comment{
-    char username;
-    char content;
-    int like;
+    char *username;
+    char *content;
     struct reply* replies;
     struct comment* next;
 };

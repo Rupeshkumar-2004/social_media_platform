@@ -7,7 +7,7 @@
 #include"comment.h"
 #include"reply.h"
 
-
+//platform declaration..
 struct platform* global_platform=NULL;
 
 //to create a platform
@@ -39,6 +39,7 @@ bool add_post(char* username,char* caption){
     return true;
 }
 
+//function to view post
 struct post* view_post(int n){
     if(n<=0||global_platform->posts==NULL){
         return NULL;
@@ -134,6 +135,7 @@ bool delete_post(int n){
     free_post(curr_post);
     return true;
 }
+
 //adding comment to lastViwed comment
 bool add_comment(char* username,char* content){
     struct post* post_to_add_comment = curr_post();
@@ -146,13 +148,23 @@ bool add_comment(char* username,char* content){
         return false;
     }
 
-    new_comment->next= post_to_add_comment->comments;
-    post_to_add_comment->comments =new_comment;
+    if(post_to_add_comment->comments == NULL){
+        post_to_add_comment->comments = new_comment;
+    }else{
+        struct comment* temp =post_to_add_comment->comments;
+        while(temp->next!=NULL){
+            temp = temp->next;
+        }
+        temp->next=new_comment;
+    }
+
     return true;
 }
 
+//forward declaration..
 void display_replies(struct reply* reply);
 
+//displays the comments
 void display_comments(struct comment *comment){
     if(!comment) return;
     if(comment->username&&comment->content){
@@ -224,8 +236,16 @@ bool add_reply(char* username, char* content,int n){
     if(new_reply ==NULL){
         return false;
     }
-    new_reply->next=comments->replies;
-    comments->replies=new_reply;
+
+    if(comments->replies == NULL){
+        comments->replies = new_reply;
+    }else{
+        struct reply* temp = comments->replies;
+        while(temp->next!=NULL){
+            temp =temp->next;
+        }
+        temp->next =new_reply;
+    }
 
     return true;
 }
@@ -270,7 +290,7 @@ bool delete_reply(int n,int m){
     return true;
 }
 
-
+//displays the replies..
 void display_replies(struct reply *reply) {
     if(!reply) return;
     if(reply->username&&reply->content)

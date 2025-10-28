@@ -2,8 +2,8 @@
 #define REPLY_H
 
 struct reply{
-    char username;
-    char content;
+    char *username;
+    char *content;
     int like;
     struct reply* next;
 };
